@@ -40,3 +40,19 @@ ndistinct_counts = iris.select(
 )
 print(ndistinct_counts)
 
+iris_summary_stats = iris.select(
+    [
+        polars.sum("SepalLength").alias("sum"),
+        polars.min("SepalLength").alias("min"),
+        polars.max("SepalLength").alias("max"),
+        polars.col("SepalLength").max().alias("other_max"),
+        polars.std("SepalLength").alias("std dev"),
+        polars.var("SepalLength").alias("variance"),
+    ]
+)
+print(iris_summary_stats)
+
+virginica_only = (
+    iris.lazy().filter(polars.col("Species").str.contains(r"gin")).collect()
+)
+print(virginica_only)
