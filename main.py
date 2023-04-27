@@ -2,6 +2,7 @@ import polars
 from datetime import datetime, timedelta
 import numpy as np
 import pandas
+import pyarrow
 # pip install xlsx2csv
 
 iris = polars.read_csv(
