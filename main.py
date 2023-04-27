@@ -2,10 +2,15 @@ import polars
 from datetime import datetime, timedelta
 import numpy as np
 import pandas
-import pyarrow
+# pip install xlsx2csv
 
 iris = polars.read_csv(
     "/Users/carstenjuliansavage/Desktop/R Working Directory/Useful Datasets/iris.csv"
+)
+
+Analytics_mindset_case_studies_Bank_Investment_Portfolios = polars.read_excel(
+    "/Users/carstenjuliansavage/PycharmProjects/Random_Project/Data Files/"
+    "Analytics_mindset_case_studies_Bank_Investment_Portfolios.xlsx"
 )
 
 iris.columns
@@ -31,6 +36,8 @@ iris_transformed = iris.select(
 ).drop(["SepalWidth", "SepalLength"])
 
 iris_transformed_pd = iris_transformed.to_pandas()
+
+df = polars.from_pandas(iris_transformed_pd)
 
 ndistinct_counts = iris.select(
     [
